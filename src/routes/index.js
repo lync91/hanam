@@ -1,9 +1,9 @@
 import React from 'react';
-import { Scene, Tabs, Stack } from 'react-native-router-flux';
+import { Scene, Tabs, Stack, Actions } from 'react-native-router-flux';
 import { Icon } from 'native-base';
 import DefaultProps from '../constants/navigation';
 import AppConfig from '../constants/config';
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ArticlesForm, ArticlesList, ArticlesSingle, ListProducts, Login } from '../containers';
 
 import AboutComponent from '../components/About';
@@ -16,6 +16,7 @@ const Index = (
         swipeEnabled
         type="replace"
         showLabel={false}
+        tabBarOnPress={(e) => isLogged(e)}
         {...DefaultProps.tabProps}
       >
         <Stack
@@ -47,5 +48,10 @@ const Index = (
     </Scene>
   </Stack>
 );
-
+const isLogged = (e) => {
+  const logged = AsyncStorage.getItem('@Auth:logged'); 
+  if (!logged) {
+   Actions.home(); 
+  }
+}
 export default Index;

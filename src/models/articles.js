@@ -232,11 +232,37 @@ export default {
         const { data, headers } = response;
         await AsyncStorage.setItem('@Auth:username', username);
         await AsyncStorage.setItem('@Auth:password', password);
+        await AsyncStorage.setItem('@Auth:logged', 'true');
+        const loggin = {
+          username: username,
+          password: password,
+          logged: true
+        }
+        dispatch.articles.updateLogin(loggin)
         return "Đăng nhập thành công";
       } catch (error) {
         console.log(error);
         throw HandleErrorMessage({...error, ...{message: 'Đăng nhập không thành công'}});
       }
+    },
+    async getLogin() {
+      const data = {
+        username: await AsyncStorage.getItem('@Auth:username'),
+        password: await AsyncStorage.getItem('@Auth:password'),
+        logged: await AsyncStorage.getItem('@Auth:logged'),
+      }
+      dispatch.articles.updateLogin(data)
+    },
+    async onLogout() {
+      await AsyncStorage.setItem('@Auth:username', '');
+      await AsyncStorage.setItem('@Auth:password', '');
+      await AsyncStorage.setItem('@Auth:logged', 'false');
+      const data = {
+        username: '',
+        password: '',
+        logged: false,
+      }
+      dispatch.articles.updateLogin(data)
     }
   }),
 
@@ -376,6 +402,12 @@ export default {
       return {
         ...state,
         loading: payload
+      }
+    },
+    updateLogin(state, payload) {
+      return {
+        ...state,
+        ...payload
       }
     }
   },

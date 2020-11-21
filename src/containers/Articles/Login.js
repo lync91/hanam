@@ -10,7 +10,9 @@ class ArticlesFormContainer extends Component {
   }
 
   componentDidMount = () => {
+    const {getLogin} = this.props
     this.getDsLoaiSanPham();
+    getLogin(); 
   }
 
   getDsLoaiSanPham = () => {
@@ -31,12 +33,16 @@ class ArticlesFormContainer extends Component {
       this.setState({ loading: false, success: null, error: error.message });
     }
   }
+  onLogout = () => {
+    const {onLogout} = this.props;
+    onLogout()
+  }
   /**
    * Render
    */
   render = () => {
-    const { userInput, dsLoaiSanPham, images } = this.props;
-    const { error, loading, success, loaiSanPham, loaiVatLieu, spName, uploading } = this.state;
+    const { userInput, dsLoaiSanPham, username, password, logged} = this.props;
+    const { error, loading, success, } = this.state;
 
     return (
       <Layout
@@ -46,6 +52,10 @@ class ArticlesFormContainer extends Component {
         defaultValues={userInput}
         dsLoaiSanPham={dsLoaiSanPham}
         onFormSubmit={this.onFormSubmit}
+        username={username}
+        password={password}
+        logged={logged}
+        onLogout={this.onLogout}
       />
     );
   }
@@ -64,12 +74,17 @@ const mapStateToProps = (state) => ({
   dsLoaiSanPham: state.articles.dsLoaiSanPham || [],
   images: state.articles.images || [],
   userInput: state.articles.userInput || {},
+  username: state.articles.username || {},
+  password: state.articles.password,
+  logged: state.articles.logged || false
 });
 
 const mapDispatchToProps = (dispatch) => ({
   login: dispatch.articles.login,
   getDsLoaiSanPham: dispatch.articles.getDsLoaiSanPham,
-  uploadImage: dispatch.articles.uploadImage
+  uploadImage: dispatch.articles.uploadImage,
+  getLogin: dispatch.articles.getLogin,
+  onLogout: dispatch.articles.onLogout
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticlesFormContainer);

@@ -14,7 +14,7 @@ import {
   View,
   Icon,
   Thumbnail,
-  
+
 } from 'native-base';
 import { ActivityIndicator } from "react-native";
 import { Messages, Header, Spacer } from '../UI';
@@ -26,7 +26,11 @@ const ArticlesForm = ({
   loading,
   success,
   onFormSubmit,
+  onLogout,
   defaultValues,
+  username,
+  password,
+  logged
 }) => {
   const { register, handleSubmit, errors, setValue, getValues } = useForm({ defaultValues });
   useEffect(() => {
@@ -47,6 +51,7 @@ const ArticlesForm = ({
               autoCapitalize="none"
               keyboardType="default"
               onChangeText={(value) => setValue('username', value)}
+              value={username}
             />
           </Item>
           <Item stackedLabel>
@@ -56,14 +61,22 @@ const ArticlesForm = ({
               autoCapitalize="none"
               keyboardType="default"
               onChangeText={(value) => setValue('password', value)}
+              password={password}
             />
           </Item>
           {errors.email && <Text>{errors.email.message}</Text>}
           <Spacer size={20} />
-          <Button block onPress={handleSubmit(onFormSubmit)} disabled={loading}>
-            { loading ? <ActivityIndicator /> : null }
-            <Text>{loading ? 'Loading' : 'Đăng nhập'}</Text>
-          </Button>
+          {logged ? (
+            <Button block onPress={handleSubmit(onLogout)} disabled={loading}>
+              { loading ? <ActivityIndicator /> : null}
+              <Text>{loading ? 'Loading' : 'Đăng xuất'}</Text>
+            </Button>
+          ) : (
+              <Button block onPress={handleSubmit(onFormSubmit)} disabled={loading}>
+                { loading ? <ActivityIndicator /> : null}
+                <Text>{loading ? 'Loading' : 'Đăng nhập'}</Text>
+              </Button>
+            )}
         </Form>
       </Content>
     </Container>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Layout from '../../components/Articles/ListProducts';
+import { Actions } from "react-native-router-flux";
 
 class ArticlesListContainer extends Component {
   constructor(props) {
@@ -15,7 +16,9 @@ class ArticlesListContainer extends Component {
     };
   }
 
-  componentDidMount = () => this.fetchData();
+  componentDidMount = () => {
+    this.fetchData();
+  };
 
   /**
    * If the page prop changes, update state
