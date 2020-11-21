@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Layout from '../../components/Articles/Single';
+import { Actions } from "react-native-router-flux";
 
 class ArticlesSingleContainer extends Component {
   constructor() {

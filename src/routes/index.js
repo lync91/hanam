@@ -26,7 +26,6 @@ const Index = (
         >
           <Scene key="home" component={Login} />
         </Stack>
-
         <Stack
           key="articlesList"
           title="Danh sách sản phẩm"
@@ -36,7 +35,6 @@ const Index = (
           <Scene key="articlesList" component={ListProducts} />
           <Scene key="articlesSingle" component={ArticlesSingle} />
         </Stack>
-
         <Stack
           key="form"
           title="Thêm sản phẩm"
