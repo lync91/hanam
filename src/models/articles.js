@@ -246,10 +246,11 @@ export default {
       }
     },
     async getLogin() {
+      const res = await AsyncStorage.getItem('@Auth:logged');
       const data = {
         username: await AsyncStorage.getItem('@Auth:username'),
         password: await AsyncStorage.getItem('@Auth:password'),
-        logged: await AsyncStorage.getItem('@Auth:logged'),
+        logged: res ? JSON.parse(res) : false,
       }
       dispatch.articles.updateLogin(data)
     },

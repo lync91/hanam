@@ -17,7 +17,6 @@ axios.defaults.baseURL = Config.apiBaseUrl;
 axios.interceptors.request.use(
   async (inputConfig) => {
     const config = inputConfig;
-
     // Check for and add the stored Auth Token to the header request
     // let token = 'mifFKhdEIuHKBGUBMvaz4aVj8TGcsRQU';
     // try {

@@ -16,7 +16,7 @@ const Index = (
         swipeEnabled
         type="replace"
         showLabel={false}
-        tabBarOnPress={(e) => isLogged(e)}
+        // tabBarOnPress={(e) => isLogged(e)}
         {...DefaultProps.tabProps}
       >
         <Stack
@@ -48,10 +48,13 @@ const Index = (
     </Scene>
   </Stack>
 );
-const isLogged = (e) => {
-  const logged = AsyncStorage.getItem('@Auth:logged'); 
+const isLogged = async (e) => {
+  const logged = JSON.parse(await AsyncStorage.getItem('@Auth:logged')); 
   if (!logged) {
    Actions.home(); 
+  } else {
+    Actions[e.navigation.state.key]();
   }
+  return;
 }
 export default Index;

@@ -2,8 +2,9 @@ import React from 'react';
 import * as Font from 'expo-font';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import { Router, Stack } from 'react-native-router-flux';
+import { Router, Stack, Actions } from 'react-native-router-flux';
 import { PersistGate } from 'redux-persist/es/integration/react';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { Root, StyleProvider } from 'native-base';
 import getTheme from '../native-base-theme/components';
@@ -29,6 +30,17 @@ class App extends React.Component {
 
     this.setState({ loading: false });
   }
+
+  // onStateChange = async (e) => {
+  //   const res = await AsyncStorage.getItem('@Auth:logged');
+  //   console.log(res);
+  //   const logged = res ? JSON.parse(res) : false; 
+  //   // if (!logged) {
+  //   //  Actions.home();
+  //   //  return
+  //   // }
+    
+  // }
 
   render() {
     const { loading, logged } = this.state;

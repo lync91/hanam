@@ -74,7 +74,7 @@ const mapStateToProps = (state) => ({
   dsLoaiSanPham: state.articles.dsLoaiSanPham || [],
   images: state.articles.images || [],
   userInput: state.articles.userInput || {},
-  username: state.articles.username || {},
+  username: state.articles.username,
   password: state.articles.password,
   logged: state.articles.logged || false
 });

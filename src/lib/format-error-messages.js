@@ -1,3 +1,4 @@
+import { Actions } from "react-native-router-flux";
 /**
  * Create a readable error message for the front-end user
  */
@@ -13,6 +14,7 @@ export default (error) => {
       }
     }
    */
+
   if (error && error.errors) {
     let errors = '';
     Object.entries(error.errors).forEach((v) => {
@@ -40,5 +42,5 @@ export default (error) => {
   }
 
   // Otherwise create an error
-  return new Error('Uh oh - something happened');
+  return new Error('Uh oh - Có lỗi gì đó');
 };
